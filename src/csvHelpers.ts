@@ -23,7 +23,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import { Result, captureResult } from './result';
-import sync from 'csv-parse/lib/sync';
+import sync from 'csv-parse/sync';
 
 /**
  * Reads a CSV file from a supplied path.
@@ -36,6 +36,6 @@ export function readCsvFileSync(srcPath: string): Result<unknown> {
         const fullPath = path.resolve(srcPath);
         const body = fs.readFileSync(fullPath, 'utf8').toString();
         // eslint-disable-next-line
-        return sync(body, { trim: true, from_line: 2});
+        return sync.parse(body, { trim: true, from_line: 2});
     });
 }
